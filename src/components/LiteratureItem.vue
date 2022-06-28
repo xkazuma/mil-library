@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "LiteratureItem",
+  name: "literature-item",
   props: {
     title: String,
     image: URL,

@@ -1,6 +1,6 @@
 <template>
   <img alt="MIL logo" src="./assets/millogo-h.png">
-  <LibraryEntrance />
+  <library-entrance />
 </template>
 
 <script>

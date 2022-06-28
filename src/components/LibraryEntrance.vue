@@ -21,9 +21,8 @@
 <script>
 
 export default {
-  name: "LibraryEntrance.vue",
+  name: "library-entrance",
   components: {
-    //LiteratureItem
   },
   props: {
   }
