@@ -1,15 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="MIL logo" src="./assets/millogo-h.png">
+  <LibraryEntrance />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LibraryEntrance from './components/LibraryEntrance'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LibraryEntrance
   }
 }
 </script>
