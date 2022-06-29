@@ -5,26 +5,41 @@
       Welcome to MIL Library!!!
     </p>
 
-    <h2>New literatures...</h2>
-    <ul id = "new">
-    </ul>
-    <h2>Favorite literatures...</h2>
-    <ul id = "fav">
-    </ul>
-    <h2>Others...</h2>
-    <ul id = "other">
-    </ul>
+    <nav class = "nav justify-content-center">
+      <a class = "nav-link" v-for="tab in tabs"
+          v-bind:key="tab"
+          v-on:click="activeTab = tab">
+        {{ tab }}
+      </a>
+    </nav>
+    <component class="tabContents" v-bind:is="selectTab"></component>
   </div>
-
 </template>
 
 <script>
+import LibrarySearchTop   from './LibrarySearchTop.vue'
+import LibrarySearchLab   from './LibrarySearchLab.vue'
+import LibrarySearchWorld from './LibrarySearchWorld.vue'
 
 export default {
   name: "library-entrance",
   components: {
+    'library-search-top'  : LibrarySearchTop,
+    'library-search-lab'  : LibrarySearchLab,
+    'library-search-world': LibrarySearchWorld
   },
   props: {
+  },
+  data() {
+    return {
+      activeTab: "Top",
+      tabs     : ["Top", "Lab", "World"]
+    }
+  },
+  computed: {
+    selectTab: function () {
+      return "library-search-" + this.activeTab.toLowerCase();
+    }
   }
 }
 </script>
@@ -42,6 +57,8 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #39b17b;
 }
+
+/* tab */
 </style>
