@@ -55,7 +55,7 @@ export default {
       inputIsbn : "",
       inputTitle: "",
       url       : require('@/assets/noimage.png')
-    }
+    };
   },
   watch: {
     inputIsbn(inputIsbn) {
@@ -84,9 +84,10 @@ export default {
     inputTitle(inputTitle) {
       const baseurl = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404";
       if (inputTitle.length >= 3) {
-        const requestUrl = baseurl + "?format=json&title=" + inputTitle + "&applicationId=APIKEY";
+        const requestUrl = baseurl + "?format=json&title=" + inputTitle + "&applicationId=1064472035819181340";
         axios.get(requestUrl)
             .then(response => {
+              this.results = [];
               console.log(response.data.Items);
               for (const item of response.data.Items) {
                 const book = {};
@@ -105,7 +106,11 @@ export default {
       } else {
         this.results = [];
       }
+    },
+    results(results) {
+      return results;
     }
+
   }
 }
 </script>
