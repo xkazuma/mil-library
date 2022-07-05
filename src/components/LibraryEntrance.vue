@@ -1,18 +1,21 @@
 <template>
-  <div class="library-entrance">
+  <div class="container library-entrance">
     <h1>MIL Library</h1>
     <p>
       Welcome to MIL Library!!!
     </p>
 
     <nav class = "nav justify-content-center">
+
       <a class = "nav-link" v-for="tab in tabs"
-          v-bind:key="tab"
-          v-on:click="activeTab = tab">
+         v-bind:key="tab"
+         v-on:click="activeTab = tab">
         {{ tab }}
       </a>
     </nav>
+    <keep-alive>
     <component class="tabContents" v-bind:is="selectTab"></component>
+    </keep-alive>
   </div>
 </template>
 

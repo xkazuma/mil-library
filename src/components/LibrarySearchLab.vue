@@ -1,5 +1,5 @@
 <template>
-  <div class="library-search-lab">
+  <div class="container library-search-lab">
     <h2>Search books in MIL</h2>
   </div>
 </template>
