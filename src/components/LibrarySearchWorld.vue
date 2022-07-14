@@ -84,7 +84,7 @@ export default {
     inputTitle(inputTitle) {
       const baseurl = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404";
       if (inputTitle.length >= 3) {
-        const requestUrl = baseurl + "?format=json&title=" + inputTitle + "&applicationId=1064472035819181340";
+        const requestUrl = baseurl + "?format=json&title=" + inputTitle + "&applicationId=<APPKEY>";
         axios.get(requestUrl)
             .then(response => {
               this.results = [];
