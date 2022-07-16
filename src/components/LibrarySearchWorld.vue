@@ -59,7 +59,7 @@ export default {
   },
   watch: {
     inputIsbn(inputIsbn) {
-      const baseurl = "https://api.openbd.jp/v1/get";
+      const baseurl = process.env.VUE_APP_OPENBD_API_BASE;
       if (inputIsbn.length === 13) {
         const requestUrl = baseurl + "?isbn=" + inputIsbn;
         axios.get(requestUrl)
@@ -82,9 +82,9 @@ export default {
       }
     },
     inputTitle(inputTitle) {
-      const baseurl = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404";
+      const baseurl = process.env.VUE_APP_RAKUTEN_API_BASE;
       if (inputTitle.length >= 3) {
-        const requestUrl = baseurl + "?format=json&title=" + inputTitle + "&applicationId=<APPKEY>";
+        const requestUrl = baseurl + "?format=json&title=" + inputTitle + "&applicationId=" + process.env.VUE_APP_RAKUTEN_APP_APIKEY
         axios.get(requestUrl)
             .then(response => {
               this.results = [];
