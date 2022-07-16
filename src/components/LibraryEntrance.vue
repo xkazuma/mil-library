@@ -1,6 +1,6 @@
 <template>
   <div class="container library-entrance">
-    <h1>MIL Library</h1>
+    <h1>{{ title }}</h1>
     <p>
       Welcome to MIL Library!!!
     </p>
@@ -35,6 +35,7 @@ export default {
   },
   data() {
     return {
+      title    : process.env.VUE_APP_TITLE,
       activeTab: "Top",
       tabs     : ["Top", "Lab", "World"]
     }
