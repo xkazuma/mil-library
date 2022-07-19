@@ -1,16 +1,11 @@
 <template>
   <div class="container library-entrance">
-    <h1>{{ title }}</h1>
-    <p>
-      Welcome to MIL Library!!!
-    </p>
-
     <nav class = "nav justify-content-center">
 
       <a class = "nav-link" v-for="tab in tabs"
-         v-bind:key="tab"
-         v-on:click="activeTab = tab">
-        {{ tab }}
+         v-bind:key="tab.name"
+         v-on:click="activeTab = tab.name">
+        {{ tab.label }}
       </a>
     </nav>
     <keep-alive>
@@ -23,26 +18,43 @@
 import LibrarySearchTop   from './LibrarySearchTop.vue'
 import LibrarySearchLab   from './LibrarySearchLab.vue'
 import LibrarySearchWorld from './LibrarySearchWorld.vue'
+import { ref }            from 'vue';
 
 export default {
+
   name: "library-entrance",
   components: {
     'library-search-top'  : LibrarySearchTop,
     'library-search-lab'  : LibrarySearchLab,
     'library-search-world': LibrarySearchWorld
   },
-  props: {
-  },
-  data() {
+
+  props: { },
+
+  setup() {
+
+    const title     = process.env.VUE_APP_TITLE;
+    const activeTab = ref("top");
+    const tabs      = [
+      { name  : "top",   label : "トップページ" },
+      { name  : "lab",   label : "研究室から探す" },
+      { name  : "world", label : "APIで世界から探す" },
+    ];
+
     return {
-      title    : process.env.VUE_APP_TITLE,
-      activeTab: "Top",
-      tabs     : ["Top", "Lab", "World"]
+
+      title,
+      activeTab,
+      tabs,
+
     }
   },
   computed: {
+
     selectTab: function () {
-      return "library-search-" + this.activeTab.toLowerCase();
+
+      return "library-search-" + this.activeTab;
+
     }
   }
 }

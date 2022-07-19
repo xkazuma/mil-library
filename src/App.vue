@@ -1,5 +1,7 @@
 <template>
-  <img alt="MIL logo" src="./assets/millogo-h.png">
+  <div class="container">
+    <img alt="MIL logo" src="./assets/millogo-h.png">
+  </div>
   <library-entrance />
 </template>
 
@@ -16,6 +18,6 @@ export default {
 
 <style>
 img {
-  width : 80%;
+  width : 50%;
 }
 </style>
