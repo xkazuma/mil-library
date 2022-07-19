@@ -40,6 +40,7 @@
 <script>
 import LiteratureItem from "@/components/LiteratureItem";
 import axios from "axios";
+import { ref } from 'vue';
 
 export default {
   name: "library-search-lab",
@@ -47,20 +48,58 @@ export default {
     "literature-item": LiteratureItem
   },
   props: {},
-  data() {
+
+  setup() {
+
+    const all        = ref([]);
+    const results    = ref([]);
+    const inputIsbn  = ref("");
+    const inputTitle = ref("");
+    const url        = require('@/assets/noimage.png')
+
+    axios.get('/literatures/list')
+        .then(response => {
+          for (const item of response.data) {
+            const book = {};
+            book.isbn   = item.isbn;
+            book.title  = item.title;
+            book.author = item.author;
+            book.image  = item.image;
+            book.desc   = item.description;
+            all.value.push(book);
+          }
+          resetResult();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+    const resetResult = () => {
+
+      results.value = JSON.parse(JSON.stringify(all.value));
+
+    }
+
+    resetResult();
+
     return {
-      results   : [],
-      inputIsbn : "",
-      inputTitle: "",
-      url       : require('@/assets/noimage.png')
+      all,
+      results,
+      inputIsbn,
+      inputTitle,
+      url,
+      resetResult,
     };
+
   },
+
   watch: {
     inputIsbn(inputIsbn) {
       if (inputIsbn.length === 13) {
         axios.get('/literatures/isbn/' + inputIsbn)
             .then(response => {
-              this.results = [];
+
+              this.results.splice(0);
               for (const item of response.data) {
                 const book = {};
                 book.isbn   = item.isbn;
@@ -79,35 +118,35 @@ export default {
         this.results = [];
       }
     },
+
     inputTitle(inputTitle) {
-      if (inputTitle.length >= 3) {
-        axios.get('/literatures/title/' + inputTitle)
-            .then(response => {
-              this.results = [];
-              for (const item of response.data) {
-                const book = {};
-                book.isbn   = item.isbn;
-                book.title  = item.title;
-                book.author = item.author;
-                book.image  = item.image;
-                book.desc   = item.description;
-                this.results.push(book);
-              }
-            })
-            .catch(error => {
-              console.log(error);
-              this.results = [];
-            });
-      } else {
-        this.results = [];
+
+      if(inputTitle.length === 0) this.resetResult();
+
+      this.results.splice(0);
+
+      for(const item of this.all) {
+
+        if(item.title.indexOf(inputTitle) !== -1) {
+
+          const book = {};
+          book.isbn   = item.isbn;
+          book.title  = item.title;
+          book.author = item.author;
+          book.image  = item.image;
+          book.desc   = item.description;
+          this.results.push(book);
+
+        }
       }
     },
+
     results(results) {
+
       return results;
+
     }
-
   }
-
 }
 </script>
 
