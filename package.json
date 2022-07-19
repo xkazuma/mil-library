@@ -7,7 +7,7 @@
     "prod-serve":  "vue-cli-service serve --mode production",
     "dev-build":   "vue-cli-service build --mode development",
     "prod-build":  "vue-cli-service build --mode production",
-    "lint":        "vue-cli-service lint"
+    "clean":       "rimraf dist"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
