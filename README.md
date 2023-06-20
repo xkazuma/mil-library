@@ -1,8 +1,8 @@
-# docker-vite
+# mil-library
 
-A template project developed using Vite on Docker container.
+This project is a web application for managing books in Media Informatics Laboratory.
 
-## How to use
+## How to build
 
 1. You clone this repository on your environment for development.
 2. Please execute scripts as follows:
